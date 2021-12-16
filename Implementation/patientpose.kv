@@ -1,0 +1,75 @@
+<MyGridLayout>
+
+	train: train_path
+	test: test_path
+	export: export_path
+
+	GridLayout:
+		cols: 1
+		size: root.width, root.height
+		size_hint: (0.9, 0.9)
+		pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+		Image:
+			source: "./resources/logo.png"
+
+		GridLayout:
+			cols: 2
+			size_hint: (0.9, 0.9)
+			pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+			Label:
+				text: "Train Folder: "
+				font_size: 20
+				color: '#00FFCE'
+				size_hint_x: None
+				width: 250
+			
+			TextInput:
+				id: train_path
+				multiline: False
+				font_size: 18
+				padding_y: (15, 10)
+
+			Label:
+				text: "Test Folder: "
+				font_size: 20
+				color: '#00FFCE'
+				size_hint_x: None
+				width: 250
+			
+			TextInput:
+				id: test_path
+				multiline: False
+				font_size: 18
+				padding_y: (15, 10)
+			
+			Label:
+				text: "Model Folder: "
+				font_size: 20
+				color: '#00FFCE'
+				size_hint_x: None
+				width: 250
+			
+			TextInput:
+				id: export_path
+				multiline: False
+				font_size: 18
+				padding_y: (15, 10)
+
+		GridLayout:
+			cols: 3
+			size_hint: (0.9, 0.9)
+			pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+			Button:
+				text: "TRAIN MODEL"
+				font_size: 18
+
+			Button:
+				text: "TEST MODEL"
+				font_size: 18
+
+			Button:
+				text: "EXPORT MODEL"
+				font_size: 18
