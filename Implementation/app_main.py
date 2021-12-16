@@ -11,15 +11,23 @@ class MyGridLayout(Widget):
     
     train_path = ObjectProperty(None)
     test_path = ObjectProperty(None)
-    export_path = ObjectProperty(None)
+    model_path = ObjectProperty(None)
 
 
-    def press(self):
+    def press_train(self):
         train = self.train_path.text
-        test = self.test_path.text
-        export = self.export_path.text
+        print(f"Train path: {train}")
+        self.train_path.text = ""
 
-        print(f"Train path: {train}, Test path: {test}, Export path: {export}")
+    def press_test(self):
+        test = self.test_path.text
+        print(f"Test path: {test}")
+        self.test_path.text = ""
+
+    def press_export(self):
+        model = self.model_path.text
+        print(f"Model path: {model}")
+        self.model_path.text = ""
 
 class PatientPoseApp(App):
     def build(self):

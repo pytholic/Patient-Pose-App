@@ -1,8 +1,8 @@
 <MyGridLayout>
 
-	train: train_path
-	test: test_path
-	export: export_path
+	train_path: train_path
+	test_path: test_path
+	model_path: model_path
 
 	GridLayout:
 		cols: 1
@@ -17,6 +17,8 @@
 			cols: 2
 			size_hint: (0.9, 0.9)
 			pos_hint: {"center_x": 0.5, "center_y": 0.5}
+			raw_force_default: True
+			row_default_height: 50
 
 			Label:
 				text: "Train Folder: "
@@ -52,7 +54,7 @@
 				width: 250
 			
 			TextInput:
-				id: export_path
+				id: model_path
 				multiline: False
 				font_size: 18
 				padding_y: (15, 10)
@@ -61,15 +63,20 @@
 			cols: 3
 			size_hint: (0.9, 0.9)
 			pos_hint: {"center_x": 0.5, "center_y": 0.5}
+			raw_force_default: True
+			row_default_height: 50
 
 			Button:
 				text: "TRAIN MODEL"
 				font_size: 18
+				on_press: root.press_train()
 
 			Button:
 				text: "TEST MODEL"
 				font_size: 18
+				on_press: root.press_test()
 
 			Button:
 				text: "EXPORT MODEL"
 				font_size: 18
+				on_press: root.press_export()

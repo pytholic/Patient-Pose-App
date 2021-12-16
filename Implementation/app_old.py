@@ -132,7 +132,7 @@ class MyGridLayout(GridLayout):
 
     def press_export(self, instance):
         model = self.model_path.text
-        print(f"Train path: {model}")
+        print(f"Model path: {model}")
 
 class PatientPoseOldApp(App):
     def build(self):
