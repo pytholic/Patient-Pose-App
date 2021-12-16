@@ -21,9 +21,10 @@ from torchvision.datasets import ImageFolder
 from matplotlib import pyplot as plt
 from dataloader import *
 
+from __main__ import *
 
-TRAIN_DIR = '../dataset/train/'
-TEST_DIR = '../dataset/test/'
+TRAIN_DIR = train[0] + '/'
+TEST_DIR = test[0] + '/'
 
 # Check hardware accelerator
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")

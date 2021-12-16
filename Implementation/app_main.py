@@ -7,6 +7,8 @@ from kivy.lang import Builder
 
 Builder.load_file("design.kv")
 
+train = []
+test = []
 
 class MyLayout(Widget):
     
@@ -16,13 +18,20 @@ class MyLayout(Widget):
 
 
     def press_train(self):
+        train_data = self.train_path.text
+        train.append(str(train_data))
+        self.train_path.text = ""
         print("*****Starting Training*****")
         runpy.run_path('./train.py')
+        train.clear()
 
     def press_test(self):
-        test = self.test_path.text
-        print(f"Test path: {test}")
+        test_data = self.test_path.text
+        test.append(str(test_data))
         self.test_path.text = ""
+        print("*****Starting Training*****")
+        runpy.run_path('./test.py')
+        test.clear()
 
     def press_export(self):
         model = self.model_path.text
