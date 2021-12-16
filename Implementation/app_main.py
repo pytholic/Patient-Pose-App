@@ -1,3 +1,4 @@
+import runpy
 from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.properties import ObjectProperty
@@ -15,9 +16,8 @@ class MyLayout(Widget):
 
 
     def press_train(self):
-        train = self.train_path.text
-        print(f"Train path: {train}")
-        self.train_path.text = ""
+        print("*****Starting Training*****")
+        runpy.run_path('./train.py')
 
     def press_test(self):
         test = self.test_path.text
