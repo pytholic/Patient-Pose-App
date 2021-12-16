@@ -12,7 +12,9 @@ class PatientPoseApp(App):
         self.window.cols = 1
 
         # Create text fields grid layout
-        self.top_grid = GridLayout()
+        self.top_grid = GridLayout(row_force_default=True,
+                                   row_default_height=50,
+                                   )
         self.top_grid.cols = 2
 
         # Create buttons grid layout
@@ -34,32 +36,42 @@ class PatientPoseApp(App):
         # Add widgets to window
 
         # Logo widget
-        self.window.add_widget(Image(source="./resources/logo.png"))
+        self.window.add_widget(Image(source="./resources/logo.png",
+                                     color = (1,1,1,1)))
 
         # Data path widgets
         self.train_label = Label(text="Train folder: ",
                                  font_size=20,
-                                 color='#00FFCE'
+                                 color='#00FFCE',
+                                 size_hint_x = None,
+                                 width = 250
                                  )
         self.test_label = Label(text="Test folder: ",
                                 font_size=20,
-                                color='#00FFCE'
+                                color='#00FFCE',
+                                size_hint_x = None,
+                                width = 250
                                 )
-        self.top_grid.add_widget(self.train_label)
-        self.top_grid.add_widget(self.test_label)
 
         # Text input widgets
         self.train_path = TextInput(multiline=False,
                                     font_size=18,
-                                    padding_y = (15, 10),
-                                    size_hint = (1, 0.4),
+                                    padding_y = (15, 10)
+                                    # size_hint = (1, None),
+                                    # height=50,
+                                    #width=300
                                     )
         self.test_path = TextInput(multiline=False,
                                    font_size=18,
-                                   padding_y = (15, 10),
-                                   size_hint = (1, 0.4),
+                                   padding_y = (15, 10)
+                                   # size_hint = (1, None),
+                                   # height=50,
+                                   #width=300
                                    )
+
+        self.top_grid.add_widget(self.train_label)
         self.top_grid.add_widget(self.train_path)
+        self.top_grid.add_widget(self.test_label)
         self.top_grid.add_widget(self.test_path)
 
         # Button widgets
