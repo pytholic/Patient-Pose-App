@@ -1,14 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# # Import modules
-
-# In[1]:
-
-
 import os
-import cv2
-import time
 import numpy as np
 
 import torch
@@ -28,24 +18,16 @@ from torchvision.datasets import ImageFolder
 
 from matplotlib import pyplot as plt
 from dataloader import *
+from __main__ import *
 
 
-# In[2]:
-
+if model_dir:
+  MODEL_DIR = model_dir[0]
+else:
+  MODEL_DIR = None
 
 name = 'models'
-
-try:
-    os.makedirs(os.path.join(os.getcwd(), f'{name}'))
-except FileExistsError:
-    print("Directory already exists!")
-    pass
-
 modelDir = os.path.join(os.getcwd(), f'{name}')
-
-
-# In[3]:
-
 
 # # for resnet
 # model = models.resnet18(pretrained=True)
@@ -61,27 +43,27 @@ num_classes = 4
 model.classifier[1] = nn.Linear(num_features, num_classes)
 print(model)
 
-
-# In[4]:
-
-
 # Load the trained model
-
 model = model
-#state_dict = torch.load(os.path.join(modelDir, 'best_model.pth')) # for GPU
-state_dict = torch.load(os.path.join(modelDir, 'best_model.pth'), map_location=torch.device('cpu')) # for CPU
-model.load_state_dict(state_dict)
+state_dict = None
 
+if MODEL_DIR:
+  state_dict = torch.load(os.path.join(MODEL_DIR, 'best_model.pth'), map_location=torch.device('cpu'))
+if os.path.exists(modelDir):
+  state_dict = torch.load(os.path.join(modelDir, 'best_model.pth'), map_location=torch.device('cpu')) # for CPU
+else:
+  print("Model file does not exist. Please enter path for model file.")
 
-# In[5]:
+try:
+  model.load_state_dict(state_dict)
+except:
+    print("No model found, state_dict is empty!")
+    sys.exit(1)
 
 
 # We don't need gpu for inference
 device = torch.device("cpu")
 model.to(device)
-
-
-# In[6]:
 
 
 # Onnx export
@@ -97,17 +79,10 @@ torch.onnx.export(model,
                   )
 
 
-# In[7]:
-
-
 # CoreML Export
 input = torch.randn(1, 3, 240, 320)
 model = model.eval()
 traced_model = torch.jit.trace(model, input)
-
-
-# In[8]:
-
 
 import coremltools as ct
 
@@ -124,10 +99,10 @@ model = ct.convert(
 
 # inputs=[ct.TensorType(name="input_1", shape=input.shape)]
 
-
-# In[9]:
-
-
 # Save model
-model.save(os.path.join(modelDir, "model.mlmodel"))
-
+if os.path.exists(modelDir):
+    model.save(os.path.join(modelDir, "model.mlmodel"))
+elif MODEL_DIR:
+    model.save(os.path.join(MODEL_DIR, "model.mlmodel"))
+else:
+    print("Save directory not found!")

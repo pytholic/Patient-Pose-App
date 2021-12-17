@@ -55,6 +55,10 @@ class MyLayout(Widget):
         model_data = self.model_path.text
         model_dir.append(str(model_data))
         self.model_path.text = ""
+        print("*****Exporting Model*****")
+        runpy.run_path('./export.py')
+        print("*****Finished Exporting*****")
+        model_dir.clear()
 
 class PatientPoseApp(App):
     def build(self):

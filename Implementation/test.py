@@ -23,6 +23,7 @@ from matplotlib import pyplot as plt
 from dataloader import *
 from __main__ import *
 
+
 if test_dir:
   TEST_DIR = test_dir[0] + '/'
 else:
@@ -32,6 +33,7 @@ if model_dir:
   MODEL_DIR = model_dir[0]
 else:
   MODEL_DIR = None
+
 # Utility to apply transforms
 def get_transform():
   mean = (127.5)
