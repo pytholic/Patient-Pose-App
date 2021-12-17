@@ -23,8 +23,8 @@ from dataloader import *
 
 from __main__ import *
 
-TRAIN_DIR = train[0] + '/'
-TEST_DIR = test[0] + '/'
+TRAIN_DIR = train_dir[0] + '/'
+TEST_DIR = test_dir[0] + '/'
 
 # Check hardware accelerator
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -199,7 +199,7 @@ model = model.to(device)
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr = 0.0001)
 lr_scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.1)
-EPOCHS = 20
+EPOCHS = 5
 
 
 # # Training phase

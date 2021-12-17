@@ -1,13 +1,6 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# # Import modules
-
-# In[1]:
-
-
 import os
 import cv2
+import sys
 import time
 import numpy as np
 
@@ -28,11 +21,17 @@ from torchvision.datasets import ImageFolder
 
 from matplotlib import pyplot as plt
 from dataloader import *
+from __main__ import *
 
+if test_dir:
+  TEST_DIR = test_dir[0] + '/'
+else:
+  TEST_DIR = None
 
-# In[2]:
-
-
+if model_dir:
+  MODEL_DIR = model_dir[0]
+else:
+  MODEL_DIR = None
 # Utility to apply transforms
 def get_transform():
   mean = (127.5)
@@ -41,21 +40,8 @@ def get_transform():
   return T.Compose([normalize])
 
 
-# In[3]:
-
-
 name = 'models'
-
-try:
-    os.makedirs(os.path.join(os.getcwd(), f'{name}'))
-except FileExistsError:
-    print("Directory already exists!")
-    pass
-
 modelDir = os.path.join(os.getcwd(), f'{name}')
-
-
-# In[4]:
 
 
 # Testing function
@@ -92,11 +78,6 @@ def evaluate_model(model, test_loader):
   return acc
 
 
-# # Define the model
-
-# In[5]:
-
-
 # # for resnet
 # model = models.resnet18(pretrained=True)
 # num_features = model.fc.in_features
@@ -112,8 +93,6 @@ model.classifier[1] = nn.Linear(num_features, num_classes)
 print(model)
 
 
-# In[6]:
-
 
 from PIL import Image
 
@@ -121,27 +100,28 @@ from PIL import Image
 classes = ['head_left', 'head_right', 'none', 'standing']
 
 
-# In[7]:
-
-
 # Load the trained model
-
 model = model
+state_dict = None
 #state_dict = torch.load(os.path.join(modelDir, 'best_model.pth')) # for GPU
-state_dict = torch.load(os.path.join(modelDir, 'best_model.pth'), map_location=torch.device('cpu')) # for CPU
-model.load_state_dict(state_dict)
 
+if MODEL_DIR:
+  state_dict = torch.load(os.path.join(MODEL_DIR, 'best_model.pth'), map_location=torch.device('cpu'))
+if os.path.exists(modelDir):
+  state_dict = torch.load(os.path.join(modelDir, 'best_model.pth'), map_location=torch.device('cpu')) # for CPU
+else:
+  print("Model file does not exist. Please enter path for model file.")
 
-# In[8]:
-
+try:
+  model.load_state_dict(state_dict)
+except:
+    print("No model found, state_dict is empty!")
+    sys.exit(1)
+  
 
 # We don't need gpu for inference
 device = torch.device("cpu")
 model.to(device)
-
-
-# In[9]:
-
 
 def classify_fancy(model, image_transforms, images_path, classes):
   model = model.eval()
@@ -198,9 +178,8 @@ def classify_fancy(model, image_transforms, images_path, classes):
       plt.title(f'Prediction: {predicted_class}')
       plt.show()
 
-
-# In[10]:
-
-
-classify_fancy(model, get_transform(), '../dataset/test_prediction', classes)
-
+if TEST_DIR:
+  print(TEST_DIR)
+  classify_fancy(model, get_transform(), TEST_DIR, classes)
+else:
+  print("Please enter test folder path!")
