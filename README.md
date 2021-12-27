@@ -78,7 +78,7 @@ Following steps show some guidelines to use the framework.
 ## Folder Structure
 Before you begin using the framework, make sure your data folder structure looks like this.
 
-```python
+```console
 |-- dataset
     |-- train
         |-- head_left
