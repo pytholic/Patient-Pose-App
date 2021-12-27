@@ -1,5 +1,5 @@
 # Overview
-This is the `development` repository for the [Patient Pose Detection App](https://github.com/pytholic/Patient-Pose-App). Main parts are developing GUI using `Kivy` libbrary in python and then packaging it as an executable using `pyinstaller`.
+A GUI framework for patient pose estimation based on `PyTorch` and `Kivy`. Main parts are developing GUI using `Kivy` library in python, packaging it as an executable using `pyinstaller`, and then using the app.
 
 # Setup
 Install the required packages using `requirement.txt` inside your conda environment or create environment using `environment.yml` file.
@@ -71,6 +71,93 @@ Run
 ```console
 pyinstaller app_main.py -y
 ```
+
+# Using the framework
+Following steps show some guidelines to use the framework.
+
+## Folder Structure
+Before you begin using the framework, make sure your data folder structure looks like this.
+
+```python
+|-- dataset
+    |-- train
+        |-- head_left
+            |-- img1
+            |-- img2
+            |-- .
+        |-- head_right
+            |-- img1
+            |-- img2
+            |-- .
+        |-- none
+            |-- img1
+            |-- img2
+            |-- .
+        |-- standing
+            |-- img1
+            |-- img2 
+            |-- .
+    |-- test # used for validation during training
+        |-- head_left
+            |-- img1
+            |-- img2
+            |-- .
+        |-- head_right
+            |-- img1
+            |-- img2
+            |-- .
+        |-- none
+            |-- img1
+            |-- img2
+            |-- .
+        |-- standing
+            |-- img1
+            |-- img2 
+            |-- .
+    |-- test_pred # used for testing on images
+        |-- img1
+        |-- img2
+        |-- .
+```
+
+## Usage
+Run `dist\app_main\app_main.exe`. This will start the GUI app alongwith a console. You can create a shortcut of `app_main.exe` for your convenience.
+<p align="center">
+  <img src="./assets/run_app.JPG">
+</p>
+
+<p align="center">
+  <img src="./assets/main_page.JPG">
+</p>
+
+### Training
+To **train** the model on your data, copy the paths of your `train` and `test` folder and paste them in the `Train Folder` and `Test Folder` input dialogs in the app respectively. Then click on `TRAIN MODEL` and it will start training. You can also visualize the training output and loss in the `console`.
+
+Note that after the training ends, the final `models` are stored at `dist\app_main\models`.
+
+<p align="center">
+  <img src="./assets/train.JPG">
+</p>
+
+### Testing
+To perform **inference** using the trained model on test data, run the app and write the path of your test images in the `Test Folder` dialog. After that enter the location of your model folder in the `Model Folder` dialog. If you do not enter the model location, then the program will automatically use the model from the folder which was created in the training step i.e. `dist\app_main\models`.
+
+<p align="center">
+  <img src="./assets/test.JPG">
+</p>
+
+### Exporting the model
+To export the model to `onnx` format, enter the path for input PyTorch model in the `Model Folder`. If you do not enter the model location, then the program will automatically use the model from the folder which was created in the training step i.e. `dist\app_main\models`. The output `onnx` model is stored in the same input folder.
+#### **Note**
+Currently `CoreML` export is only supported on **macOS** and **Ubuntu**, but not on **Windows**. So we have to do that separately.
+
+<p align="center">
+  <img src="./assets/export.JPG">
+</p>
+
+## Important Notes
+* While a process is running i.e. training, testing, or model export, try not to click on the app window as it might result in a crash. When the program execution is finished, you will either get a `finished` message in the console, or the input path fields in the `Train Fodler`, `Test Folder`, or `Model Folder` will disappear.
+* Make sure that your `PATHS` do not contain any **Korean** characters.
 
 # Useful links
 * https://www.youtube.com/watch?v=k4QCoS-hj-s&list=PLCC34OHNcOtpz7PJQ7Tv7hqFBP_xDDjqg&index=5
