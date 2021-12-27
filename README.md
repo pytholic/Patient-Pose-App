@@ -161,6 +161,7 @@ Currently `CoreML` export is only supported on **macOS** and **Ubuntu**, but not
 ## Important Notes
 * While a process is running i.e. training, testing, or model export, try not to click on the app window as it might result in a crash. When the program execution is finished, you will either get a `finished` message in the console, or the input path fields in the `Train Fodler`, `Test Folder`, or `Model Folder` will disappear.
 * Make sure that your `PATHS` do not contain any **Korean** characters.
+* Use keyboard shotcuts to past paths in the input dialogs. For some reason `Kivy` does not support **right-click dropdown menu**. I need to figure it out.
 
 # Useful links
 * https://www.youtube.com/watch?v=k4QCoS-hj-s&list=PLCC34OHNcOtpz7PJQ7Tv7hqFBP_xDDjqg&index=5
