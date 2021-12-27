@@ -1,6 +1,8 @@
 # Overview
 A GUI framework for patient pose estimation based on `PyTorch` and `Kivy`. Main parts are developing GUI using `Kivy` library in python, packaging it as an executable using `pyinstaller`, and then using the app.
 
+Jump to [Framework Guide](#guide) if you just want to look at  the usage guide.
+
 # Setup
 Install the required packages using `requirement.txt` inside your conda environment or create environment using `environment.yml` file.
 ```console
@@ -72,13 +74,14 @@ Run
 pyinstaller app_main.py -y
 ```
 
-# Using the framework
+<a name="guide"></a>
+# Framework Guide
 Following steps show some guidelines to use the framework.
 
 ## Folder Structure
 Before you begin using the framework, make sure your data folder structure looks like this.
 
-```python
+```console
 |-- dataset
     |-- train
         |-- head_left
