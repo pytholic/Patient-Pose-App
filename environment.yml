@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 name: pose_app
 channels:
   - pytorch
@@ -88,3 +89,95 @@ dependencies:
   - pip:
     - cx-logging==3.0
 prefix: C:\Users\rajah\anaconda3\envs\pose_app
+=======
+name: pose_app
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - altgraph=0.17.2
+  - blas=2.112
+  - blas-devel=3.9.0
+  - bzip2=1.0.8
+  - ca-certificates=2021.10.8
+  - cudatoolkit=11.3.1
+  - cx_freeze=6.9
+  - docutils=0.18.1
+  - freetype=2.10.4
+  - future=0.18.2
+  - glew=2.1.0
+  - importlib-metadata=4.9.0
+  - intel-openmp=2021.4.0
+  - jbig=2.1
+  - jpeg=9d
+  - kivy=2.0.0
+  - lcms2=2.12
+  - lerc=3.0
+  - libblas=3.9.0
+  - libcblas=3.9.0
+  - libdeflate=1.8
+  - libffi=3.4.2
+  - liblapack=3.9.0
+  - liblapacke=3.9.0
+  - libpng=1.6.37
+  - libprotobuf=3.19.1
+  - libtiff=4.3.0
+  - libuv=1.42.0
+  - libzlib=1.2.11
+  - lz4-c=1.9.3
+  - m2w64-gcc-libgfortran=5.3.0
+  - m2w64-gcc-libs=5.3.0
+  - m2w64-gcc-libs-core=5.3.0
+  - m2w64-gmp=6.1.0
+  - m2w64-libwinpthread-git=5.0.0.4634.697f757
+  - macholib=1.14
+  - mkl=2021.4.0
+  - mkl-devel=2021.4.0
+  - mkl-include=2021.4.0
+  - msys2-conda-epoch=20160418
+  - numpy=1.21.4
+  - olefile=0.46
+  - onnx=1.10.2
+  - openjpeg=2.4.0
+  - openssl=3.0.0
+  - pefile=2021.9.3
+  - pillow=8.4.0
+  - pip=21.3.1
+  - protobuf=3.19.1
+  - pygments=2.10.0
+  - pyinstaller=4.7
+  - pyinstaller-hooks-contrib=2021.4
+  - python=3.9.9
+  - python_abi=3.9
+  - pytorch=1.10.1
+  - pytorch-mutex=1.0
+  - pywin32=302
+  - pywin32-ctypes=0.2.0
+  - sdl2=2.0.12
+  - sdl2_image=2.0.5
+  - sdl2_mixer=2.0.4
+  - sdl2_ttf=2.0.15
+  - setuptools=59.6.0
+  - six=1.16.0
+  - smpeg2=2.0.0
+  - sqlite=3.37.0
+  - tbb=2021.4.0
+  - tk=8.6.11
+  - torchaudio=0.10.1
+  - torchvision=0.11.2
+  - typing-extensions=4.0.1
+  - typing_extensions=4.0.1
+  - tzdata=2021e
+  - ucrt=10.0.20348.0
+  - vc=14.2
+  - vs2015_runtime=14.29.30037
+  - wheel=0.37.0
+  - xz=5.2.5
+  - zipp=3.6.0
+  - zlib=1.2.11
+  - zstd=1.5.0
+  - pip:
+    - cx-logging==3.0
+prefix: C:\Users\rajah\anaconda3\envs\pose_app
+>>>>>>> bb84d6fba44411619b87889293b4569d7d46f7df

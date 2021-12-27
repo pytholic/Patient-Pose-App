@@ -20,8 +20,11 @@ from matplotlib import pyplot as plt
 from dataloader import *
 from __main__ import *
 
+<<<<<<< HEAD
 import onnx
 #import coremltools as ct
+=======
+>>>>>>> bb84d6fba44411619b87889293b4569d7d46f7df
 
 if model_dir:
   MODEL_DIR = model_dir[0]
@@ -51,7 +54,11 @@ state_dict = None
 
 if MODEL_DIR:
   state_dict = torch.load(os.path.join(MODEL_DIR, 'best_model.pth'), map_location=torch.device('cpu'))
+<<<<<<< HEAD
 elif os.path.exists(modelDir):
+=======
+if os.path.exists(modelDir):
+>>>>>>> bb84d6fba44411619b87889293b4569d7d46f7df
   state_dict = torch.load(os.path.join(modelDir, 'best_model.pth'), map_location=torch.device('cpu')) # for CPU
 else:
   print("Model file does not exist. Please enter path for model file.")
@@ -67,18 +74,25 @@ except:
 device = torch.device("cpu")
 model.to(device)
 
+<<<<<<< HEAD
 if os.path.exists(modelDir):
   path = modelDir
 elif MODEL_DIR:
   path = MODEL_DIR
 else:
   print("Save directory not found!")
+=======
+>>>>>>> bb84d6fba44411619b87889293b4569d7d46f7df
 
 # Onnx export
 input = torch.randn(1, 3, 240, 320)
 torch.onnx.export(model, 
                   input, 
+<<<<<<< HEAD
                   os.path.join(path, 'model.onnx'), 
+=======
+                  os.path.join(modelDir, 'model.onnx'), 
+>>>>>>> bb84d6fba44411619b87889293b4569d7d46f7df
                   export_params=True,
                   opset_version=11,
                   do_constant_folding=True,
@@ -87,6 +101,7 @@ torch.onnx.export(model,
                   )
 
 
+<<<<<<< HEAD
 
 
 # CoreML Export
@@ -122,3 +137,32 @@ torch.onnx.export(model,
 # #     model.save(os.path.join(MODEL_DIR, "model.mlmodel"))
 # # else:
 # #     print("Save directory not found!")
+=======
+# CoreML Export
+input = torch.randn(1, 3, 240, 320)
+model = model.eval()
+traced_model = torch.jit.trace(model, input)
+
+import coremltools as ct
+
+# Convert to Core ML using the Unified Conversion API
+scale = 1/(0.5*255.0)
+bias = [- 0.5/(0.5) , - 0.5/(0.5), - 0.5/(0.5)]
+
+model = ct.convert(
+    traced_model,
+    inputs=[ct.ImageType(name="input_1",
+                        shape=input.shape,
+                        scale=scale,
+                        bias=bias)]) 
+
+# inputs=[ct.TensorType(name="input_1", shape=input.shape)]
+
+# Save model
+if os.path.exists(modelDir):
+    model.save(os.path.join(modelDir, "model.mlmodel"))
+elif MODEL_DIR:
+    model.save(os.path.join(MODEL_DIR, "model.mlmodel"))
+else:
+    print("Save directory not found!")
+>>>>>>> bb84d6fba44411619b87889293b4569d7d46f7df

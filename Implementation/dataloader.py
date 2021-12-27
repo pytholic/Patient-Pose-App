@@ -12,9 +12,13 @@ class CustomDataset(Dataset):
     file_list = glob.glob(self.imgs_path + "*")
     self.data = []
     for class_path in file_list:
+<<<<<<< HEAD
       # for windows
       tmp = class_path.split("/")[-1]
       class_name = tmp.split("\\")[-1]
+=======
+      class_name = class_path.split("/")[-1]
+>>>>>>> bb84d6fba44411619b87889293b4569d7d46f7df
       for img_path in glob.glob(class_path + "/*.png"):
         self.data.append([img_path, class_name])
     self.class_map = {"head_left" : 0, "head_right": 1, "none": 2, "standing": 3}
