@@ -167,3 +167,7 @@ Currently `CoreML` export is only supported on **macOS** and **Ubuntu**, but not
 * https://www.youtube.com/watch?v=k4QCoS-hj-s&list=PLCC34OHNcOtpz7PJQ7Tv7hqFBP_xDDjqg&index=5
 
 * https://www.youtube.com/watch?v=NEko7jWYKiE&list=PLCC34OHNcOtpz7PJQ7Tv7hqFBP_xDDjqg&index=20
+
+## To Do
+* A separate `colab` script for converting model from *Onnx* or *PyTorch* model to *coreml*.
+* Using `pretrained` model if it exists already to prevent training on all the data from scratch. Can save time and resources.
